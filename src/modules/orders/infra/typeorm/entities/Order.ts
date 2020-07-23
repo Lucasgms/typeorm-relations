@@ -4,9 +4,9 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   JoinColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
@@ -20,7 +20,9 @@ class Order {
   @Column()
   customer_id: string;
 
-  @ManyToOne(() => Customer)
+  @OneToOne(() => Customer, {
+    eager: true,
+  })
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
